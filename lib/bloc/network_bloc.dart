@@ -27,7 +27,6 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
     switch (event.result) {
       case ConnectivityResult.wifi:
         emit(NetworkConnected(connectionType: 'WiFi', hasInternet: hasInternet));
-
         break;
       case ConnectivityResult.mobile:
         emit(NetworkConnected(connectionType: 'Mobile Data', hasInternet: hasInternet));
