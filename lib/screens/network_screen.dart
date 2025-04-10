@@ -1,7 +1,3 @@
-import 'dart:io';
-import 'dart:math';
-
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -34,7 +30,7 @@ class NetworkScreen extends StatelessWidget {
           builder: (context, state) {
             String status = 'Network Checking...';
             String animationPath = 'assets/searching.json';
-            String pingStatus = 'Checking Internet Connection...';
+            String pingStatus = 'Checking Connection...';
             Color color = Colors.grey;
 
             if (state is NetworkConnected) {
