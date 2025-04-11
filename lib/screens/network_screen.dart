@@ -34,10 +34,6 @@ class NetworkScreen extends StatelessWidget {
             Color color = Colors.grey;
 
             if (state is NetworkConnected) {
-              // change based on the connection type
-              // status = 'Connected to ${state.connectionType == 'WiFi' ? 'WiFi' : 'Mobile Data'}';
-              // animationPath = state.connectionType == 'WiFi' ? 'assets/WiFi.json' : 'assets/data_signal.json';
-              // color = state.connectionType == 'WiFi' ? Colors.blue : Colors.green;
               if (state.connectionType == 'WiFi') {
                 status = 'Connected to ${state.connectionType}';
                 animationPath = 'assets/WiFi.json';
@@ -47,10 +43,7 @@ class NetworkScreen extends StatelessWidget {
                 animationPath = 'assets/data_signal.json';
                 color = Colors.green;
               }
-
-              // print(state.connectionType);
               pingStatus = state.hasInternet ? 'Internet is Available' : 'No Internet Access';
-              print(state.hasInternet);
             } else if (state is NetworkDisconnected) {
               status = 'No Internet Connection';
               animationPath = 'assets/no_connection.json';
