@@ -2,6 +2,8 @@ abstract class NetworkState {}
 
 class NetworkInitial extends NetworkState {}
 
+class NetworkLoading extends NetworkState {}
+
 class NetworkConnected extends NetworkState {
   final String connectionType;
   final bool hasInternet;

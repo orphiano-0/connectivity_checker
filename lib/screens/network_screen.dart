@@ -28,12 +28,16 @@ class NetworkScreen extends StatelessWidget {
       body: Center(
         child: BlocBuilder<NetworkBloc, NetworkState>(
           builder: (context, state) {
-            String status = 'Network Checking...';
-            String animationPath = 'assets/searching.json';
-            String pingStatus = 'Checking Connection...';
+            String status = '';
+            String animationPath = '';
+            String pingStatus = '';
             Color color = Colors.grey;
 
-            if (state is NetworkConnected) {
+            if (state is NetworkLoading) {
+              status = 'Checking Network...';
+              animationPath = 'assets/searching.json';
+              color = Colors.grey;
+            } else if (state is NetworkConnected) {
               if (state.connectionType == 'WiFi') {
                 status = 'Connected to ${state.connectionType}';
                 animationPath = 'assets/WiFi.json';
@@ -43,7 +47,10 @@ class NetworkScreen extends StatelessWidget {
                 animationPath = 'assets/data_signal.json';
                 color = Colors.green;
               }
-              pingStatus = state.hasInternet ? 'Internet is Available' : 'No Internet Access';
+              pingStatus =
+                  state.hasInternet
+                      ? 'Internet is Available'
+                      : 'No Internet Access';
             } else if (state is NetworkDisconnected) {
               status = 'No Internet Connection';
               animationPath = 'assets/no_connection.json';
@@ -61,7 +68,11 @@ class NetworkScreen extends StatelessWidget {
                 Text(
                   status,
                   style: GoogleFonts.workSans(
-                    textStyle: TextStyle(fontSize: 24, color: color, fontWeight: FontWeight.bold),
+                    textStyle: TextStyle(
+                      fontSize: 24,
+                      color: color,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Text(

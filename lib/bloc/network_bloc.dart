@@ -23,6 +23,8 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
   }
 
   Future<void> _onNetworkChanged(NetworkChanged event, Emitter<NetworkState> emit) async {
+    emit(NetworkLoading());
+    await Future.delayed(const Duration(seconds: 5));
     bool hasInternet = await _checkInternetAccess();
     switch (event.result) {
       case ConnectivityResult.wifi:
@@ -30,7 +32,6 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
         break;
       case ConnectivityResult.mobile:
         emit(NetworkConnected(connectionType: 'Mobile Data', hasInternet: hasInternet));
-        print(ConnectivityResult.mobile);
         break;
       case ConnectivityResult.none:
         emit(NetworkDisconnected());
@@ -44,7 +45,7 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
   Future<bool> _checkInternetAccess() async {
     try {
       final result = await http.get(Uri.parse('https://www.google.com')).timeout(
-        const Duration(seconds: 5)
+        const Duration(seconds: 2)
       );
       return result.statusCode == 200;
     } catch (_) {
